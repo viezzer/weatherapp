@@ -41,6 +41,16 @@
         const searchInput = document.querySelector(".search input")
         const searchBtn = document.querySelector(".search button")
         const weatherIcon = document.querySelector(".weather-icon")
+        const card = document.querySelector(".card")
+        const gradients = {
+            'clear': 'linear-gradient(135deg, #00feba, #5b548a)',
+            'clouds': 'linear-gradient(135deg, #cdced5, #607ad4)',
+            'drizzle': 'linear-gradient(135deg, #777690, #0a3be5)',
+            'mist': 'linear-gradient(135deg, #777690, #0a3be5)',
+            'rain': 'linear-gradient(135deg, #c2c2cb, #596cb0)',
+            'snow': 'linear-gradient(135deg, #cdced5, #9ea0a5)',
+        }
+
 
         async function checkWeather(city) {
             const response = await fetch(apiUrl + city + `&appid=${apiKey}`)
@@ -55,6 +65,8 @@
             const weather = data.weather[0].main.toLowerCase()
             const imagePath = `images/${weather}.png`
             weatherIcon.src = imagePath
+
+            card.style.background = gradients[weather]
 
             document.querySelector(".weather").style.display = "block"
         }
